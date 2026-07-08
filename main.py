@@ -3,7 +3,7 @@ import pandas as pd
 
 conn = sqlite3.connect("data.sqlite")
 
-employee_data = pd.read_sql("""SELECT * FROM employees""", conn)
+employee_data = pd.read_sql("SELECT * FROM employees;", conn)
 print("---------------------Employee Data---------------------")
 print(employee_data.head())
 print("-------------------End Employee Data-------------------")
@@ -46,9 +46,9 @@ FROM employees;
 """, conn)
 
 sum_total_price = pd.read_sql("""
-SELECT ROUND(priceEach * quantityOrdered, 2) AS total_price
+SELECT SUM(ROUND(priceEach * quantityOrdered, 2)) AS total_price
 FROM orderDetails;
-""", conn).sum()
+""", conn)
 
 df_day_month_year = pd.read_sql("""
 SELECT orderDate,
